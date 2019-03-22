@@ -14,3 +14,9 @@ build/
 
 # coverage
 coverage/
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode
