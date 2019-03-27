@@ -10,7 +10,8 @@
     "test": "jest",
     "build": "tsc",
     "watch": "tsc -w",
-    "lint": "tslint -p ."
+    "lint": "tslint -p .",
+    "docs": "compodoc src/"
   },
   "lint-staged": {
     "*.ts": [
@@ -39,6 +40,7 @@
   },
   "homepage": "https://git.pointjupiter.co/point-jupiter/talagent/intrinio-client#readme",
   "dependencies": {
+    "@compodoc/compodoc": "^1.1.9",
     "got": "^9.6.0"
   },
   "devDependencies": {

@@ -12,6 +12,9 @@ yarn-error.log*
 # build
 build/
 
+# docs
+docs/
+
 # coverage
 coverage/
 
