@@ -1,50 +1,23 @@
-import * as got from 'got'
+import { IntrinioV1 } from './v1'
+import { IntrinioV2 } from './v2'
 
-export class HttpClient {
-  private apiUrl?: string
-  private apiToken?: string
-
-  constructor (options: IntrinioClientOptions) {
-    this.apiUrl = options.apiUrl
-    this.apiToken = options.apiToken
-  }
-
-  async get (path: string, query?: QueryArgs, headers?: Headers) {
-    const response = await got(path, {
-      method: 'GET',
-      baseUrl: this.apiUrl,
-      query,
-      json: true,
-      headers: {
-        'Authorization': `Bearer ${this.apiToken}`,
-        ...headers
-      }
-    })
-
-    return response.body
-  }
-
-  async post (path: string, body?: object, query?: QueryArgs, headers?: Headers) {
-    const response = await got(path, {
-      method: 'POST',
-      baseUrl: this.apiUrl,
-      body,
-      query,
-      json: true,
-      headers: {
-        'Authorization': `Bearer ${this.apiToken}`,
-        ...headers
-      }
-    })
-
-    return response.body
-  }
+export const VERSIONS = {
+  'v1': IntrinioV1.Intrinio,
+  'v2': IntrinioV2.Intrinio
 }
 
-type QueryArgs = string | object
-type Headers = { [key: string]: number | string | string[] | undefined }
-
-export interface IntrinioClientOptions {
-  apiUrl: string
-  apiToken: string
+export function intrinio (options: IntrinioV1.Options): IntrinioV1.Intrinio
+export function intrinio (options: IntrinioV2.Options): IntrinioV2.Intrinio
+export function intrinio<T = IntrinioV1.Intrinio | IntrinioV2.Intrinio> (
+  options: IntrinioV1.Options | IntrinioV2.Options
+) {
+  const version = options.version
+  delete options.version
+  try {
+    const ctr = (VERSIONS as { [key: string]: any })[version]
+    const ep = new ctr(options)
+    return Object.freeze(ep) as T
+  } catch (e) {
+    throw new Error(`Unable to create client ("${version}"): ${e.message}`)
+  }
 }

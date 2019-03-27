@@ -4,7 +4,10 @@ import * as nock from 'nock'
 const BASE_URL = 'https://api.intrinio.com:443'
 
 describe('securities', () => {
-  let client = new IntrinioV1.Intrinio('abc')
+  let client = new IntrinioV1.Intrinio({
+    version: 'v1',
+    token: 'abc'
+  })
 
   afterEach(() => {
     nock.cleanAll()

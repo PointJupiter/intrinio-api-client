@@ -1,10 +1,13 @@
-import { IntrinioV2 } from '../../src/v2'
 import * as nock from 'nock'
+import { intrinio } from '../../src'
 
 const BASE_URL = 'https://api-v2.intrinio.com:443'
 
 describe('securities', () => {
-  let client = new IntrinioV2.Intrinio('abc')
+  let client = intrinio({
+    version: 'v2',
+    token: 'abc'
+  })
 
   afterEach(() => {
     nock.cleanAll()
@@ -37,16 +40,17 @@ describe('securities', () => {
         composite_figi: 'BBG000BCQZS4',
         share_class_figi: 'BBG001S5P034'
       }]
+      const nextPage = 'MzA5OTQ='
       const scope = nock(BASE_URL)
         .get('/securities')
         .reply(200, {
           securities: securities,
-          next_page: 'MzA5OTQ='
+          next_page: nextPage
         })
 
       const response = await client.securities.all()
       expect(response.securities).toEqual(securities)
-      expect(response.next_page).toBe('MzA5OTQ=')
+      expect(response.next_page).toBe(nextPage)
 
       scope.done()
     })

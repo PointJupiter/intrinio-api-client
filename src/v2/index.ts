@@ -1,8 +1,12 @@
-import { HttpClient } from '..'
+import { BaseClient, GlobalOptions } from '../base'
 import { SecurityService } from './securities'
 
 export namespace IntrinioV2 {
-  export class Intrinio extends HttpClient {
+  export interface Options extends GlobalOptions {
+    version: 'v2'
+  }
+
+  export class Intrinio extends BaseClient {
     securities: SecurityService
 
     constructor (token: string) {
