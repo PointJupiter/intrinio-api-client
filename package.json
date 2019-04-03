@@ -1,6 +1,6 @@
 {
-  "version": "0.0.0",
   "name": "intrinio-api-client",
+  "version": "0.0.1",
   "description": "Intrinio API client written in TypeScript",
   "files": [
     "build",
