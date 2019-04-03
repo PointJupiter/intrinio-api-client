@@ -1,6 +1,6 @@
 {
-  "name": "intrinio-client",
   "version": "0.0.0",
+  "name": "intrinio-api-client",
   "description": "Intrinio API client written in TypeScript",
   "files": [
     "build",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://git.pointjupiter.co/point-jupiter/talagent/intrinio-client.git"
+    "url": "git+https://github.com/PointJupiter/intrinio-ts.git"
   },
   "keywords": [
     "intrinio",
@@ -37,9 +37,9 @@
   "author": "Point Jupiter Developers <developers@pointjupiter.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://git.pointjupiter.co/point-jupiter/talagent/intrinio-client/issues"
+    "url": "https://github.com/PointJupiter/intrinio-ts/issues"
   },
-  "homepage": "https://git.pointjupiter.co/point-jupiter/talagent/intrinio-client#readme",
+  "homepage": "https://github.com/PointJupiter/intrinio-ts#readme",
   "dependencies": {
     "got": "^9.6.0"
   },
