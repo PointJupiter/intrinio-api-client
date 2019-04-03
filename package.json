@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "description": "Intrinio API client written in TypeScript",
   "files": [
-    "build/src",
-    "!build/src/**/*.map"
+    "build",
+    "!build/**/*.map"
   ],
   "scripts": {
     "test": "jest",
-    "build": "tsc",
+    "clean": "rimraf ./build",
+    "build": "npm run clean && tsc -p tsconfig.build.json",
     "watch": "tsc -w",
     "lint": "tslint -p .",
     "docs": "compodoc src/"
@@ -40,10 +41,10 @@
   },
   "homepage": "https://git.pointjupiter.co/point-jupiter/talagent/intrinio-client#readme",
   "dependencies": {
-    "@compodoc/compodoc": "^1.1.9",
     "got": "^9.6.0"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.9",
     "@types/got": "^9.4.1",
     "@types/jest": "^24.0.11",
     "@types/nock": "^9.3.1",
@@ -51,6 +52,7 @@
     "jest": "^24.5.0",
     "lint-staged": "^8.1.5",
     "nock": "^10.0.6",
+    "rimraf": "^2.6.3",
     "ts-jest": "^24.0.0",
     "tslint": "^5.14.0",
     "tslint-config-standard": "^8.0.1",
