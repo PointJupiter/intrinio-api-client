@@ -9,9 +9,9 @@ export namespace IntrinioV2 {
   export class Intrinio extends BaseClient {
     securities: SecurityService
 
-    constructor (token: string) {
+    constructor (options: Options) {
       super({
-        apiToken: token,
+        apiToken: options.token,
         apiUrl: 'https://api-v2.intrinio.com'
       })
 

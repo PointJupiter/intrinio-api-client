@@ -1,5 +1,9 @@
 import { IntrinioV2 } from '.'
-import { PaginationParams, PaginationResponse, ScreeningParams } from './interfaces'
+import {
+  PaginationParams,
+  PaginationResponse,
+  ScreeningParams
+} from './interfaces'
 
 export interface Security {
   /**
@@ -53,15 +57,19 @@ interface AllSecuritiesResponse extends PaginationResponse {
   securities: Security[]
 }
 
-export type Omit<ObjectType, KeysType extends keyof ObjectType> = Pick<ObjectType, Exclude<keyof ObjectType, KeysType>>
+export type Omit<ObjectType, KeysType extends keyof ObjectType> = Pick<
+  ObjectType,
+  Exclude<keyof ObjectType, KeysType>
+>
 
-interface SearchSecuritiesQueryParams extends Omit<PaginationParams, 'next_page'> {}
+interface SearchSecuritiesQueryParams
+  extends Omit<PaginationParams, 'next_page'> {}
 
 interface SearchSecuritiesResponse {
   /**
    * Array of securities.
    */
-  securities: Security[],
+  securities: Security[]
   /**
    * Gets the next page of data from a previous API call.
    */
@@ -172,7 +180,10 @@ export class SecurityService {
    * @param query Filter securities matching this string.
    * @param params Additional request params.
    */
-  async search (query: string, params?: SearchSecuritiesQueryParams): Promise<SearchSecuritiesResponse> {
+  async search (
+    query: string,
+    params?: SearchSecuritiesQueryParams
+  ): Promise<SearchSecuritiesResponse> {
     return this.client.get('/securities/search', { query, ...params })
   }
 
@@ -183,7 +194,10 @@ export class SecurityService {
    *              See screener documentation for details on how to construct conditions.
    * @param params Additional request params.
    */
-  async screen (logic: ScreeningParams, params?: ScreenSecuritiesQueryParams): Promise<ScreenSecuritiesResponse> {
+  async screen (
+    logic: ScreeningParams,
+    params?: ScreenSecuritiesQueryParams
+  ): Promise<ScreenSecuritiesResponse> {
     return this.client.post('/securities/screen', logic, params)
   }
 
@@ -198,7 +212,10 @@ export class SecurityService {
     tag: string,
     params?: HistoricalDataForSecurityParams
   ): Promise<HistoricalDataForSecurityResponse> {
-    return this.client.get(`/securities/${identifier}/historical_data/${tag}`, params)
+    return this.client.get(
+      `/securities/${identifier}/historical_data/${tag}`,
+      params
+    )
   }
 
   /**
