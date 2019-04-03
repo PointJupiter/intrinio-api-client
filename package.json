@@ -2,17 +2,22 @@
   "name": "intrinio-api-client",
   "version": "0.0.1",
   "description": "Intrinio API client written in TypeScript",
+  "main": "build/index.js",
   "files": [
+    "**/*.d.ts",
     "build",
     "!build/**/*.map"
   ],
   "scripts": {
     "test": "jest",
     "clean": "rimraf ./build",
-    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "build": "npm run clean && tsc",
     "watch": "tsc -w",
     "lint": "tslint -p .",
-    "docs": "compodoc src/"
+    "docs": "compodoc src/",
+    "defs": "tsc --declaration --outDir . --emitDeclarationOnly",
+    "prepublishOnly": "npm run build && npm run defs",
+    "postpublish": "rimraf *.d.ts v1 v2"
   },
   "lint-staged": {
     "*.ts": [

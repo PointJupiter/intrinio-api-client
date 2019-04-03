@@ -1,6 +1,9 @@
 import { IntrinioV1 } from './v1'
 import { IntrinioV2 } from './v2'
 
+export * from './v1'
+export * from './v2'
+
 export const VERSIONS = {
   'v1': IntrinioV1.Intrinio,
   'v2': IntrinioV2.Intrinio
